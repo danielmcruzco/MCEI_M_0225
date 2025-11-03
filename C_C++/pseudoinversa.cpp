@@ -21,11 +21,25 @@ int main() {
          0, 1, -1,
          1, 3, -1;
 
-    std::cout << "Matriz A:\n" << A << "\n";
-
     Eigen::MatrixXd A_pinv = pseudoInverse(A);
 
-    std::cout << "Pseudoinversa de A (Moore-Penrose):\n" << A_pinv << "\n";
+    std::cout << "Matriz A:\n" << A << "\n";
+    std::cout << "Pseudoinversa A+:\n" << A_pinv << "\n\n";
+
+    // Propiedad 1: AA⁺A ≈ A
+    std::cout << "AA⁺A:\n" << A * A_pinv * A << "\n\n";
+
+    // Propiedad 2: A⁺AA⁺ ≈ A⁺
+    std::cout << "A⁺AA⁺:\n" << A_pinv * A * A_pinv << "\n\n";
+
+    // Propiedad 3: (AA⁺)^T ≈ AA⁺
+    std::cout << "(AA⁺)^T:\n" << (A * A_pinv).transpose() << "\n";
+    std::cout << "AA⁺:\n" << A * A_pinv << "\n\n";
+
+    // Propiedad 4: (A⁺A)^T ≈ A⁺A
+    std::cout << "(A⁺A)^T:\n" << (A_pinv * A).transpose() << "\n";
+    std::cout << "A⁺A:\n" << A_pinv * A << "\n";
 
     return 0;
 }
+
